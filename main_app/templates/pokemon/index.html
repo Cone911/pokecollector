@@ -7,29 +7,29 @@
 
 <section class="page-header">
   <h1>Random Pokemon Generator</h1>
-  <img src="{% static 'images/pokemon/1.png' %}" alt="A cool cat" />
-  <img src="{% static 'images/pokemon/2.png' %}" alt="A cool cat" />
+  <img src="{% static 'images/pokemon/1.png' %}" alt="Red Pokeball" />
+  <img src="{% static 'images/pokemon/2.png' %}" alt="Blue Pokeball" />
   <img src="{% static 'images/pokemon/3.png' %}" alt="A cool cat" />
   <img src="{% static 'images/pokemon/4.png' %}" alt="A cool cat" />
 </section>
 
 <section class="card-container">
-  {% comment %} {% for poke in pokemon %} {% endcomment %}
     <div class="card">
-      <div class="card-content">
-        <div class="card-img-container">
-          <img
-            src="{{ pokemon.image_url }}"
-            alt="{{ pokemon.name }}"
-          />
+      <a href="{% url 'poke-detail' pokemon.poke_id %}">
+        <div class="card-content">
+          <div class="card-img-container">
+            <img
+              src="{{ pokemon.image_url }}"
+              alt="{{ pokemon.name }}"
+            />
+          </div>
+          <h2 class="card-title">{{ pokemon.name }}</h2>
+          <p><strong>Experience:</strong> {{ pokemon.xp }}</p>
+          <p><strong>Type:</strong> {{ pokemon.type }}</p>
+          <p><strong>Abilities:</strong> {{ pokemon.abilities }}</p>
         </div>
-        <h2 class="card-title">{{ pokemon.name }}</h2>
-        <p><strong>Experience:</strong> {{ pokemon.xp }}</p>
-        <p><strong>Type:</strong> {{ pokemon.type }}</p>
-        <p><strong>Abilities:</strong> {{ pokemon.abilities }}</p>
-      </div>
+      </a>
     </div>
-  {% comment %} {% endfor %} {% endcomment %}
 </section>
 
 {% endblock %}
