@@ -6,5 +6,5 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('pokemon/', views.index, name='pokemon-index'),
     path('pokemon/<int:poke_id>/', views.poke_detail, name='poke-detail'),
-    path('pokemon/add/<int:poke_id>', views.AddPokemonView.as_view(), name='add-pokemon')
+    path('pokemon/<int:poke_id>/catch', views.catch_pokemon, name='catch-pokemon'),
 ]
