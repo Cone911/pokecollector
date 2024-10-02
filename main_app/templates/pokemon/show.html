@@ -26,6 +26,10 @@
           <p><strong>Abilities:</strong> {{ poke.abilities }}</p>
         </div>
       </a>
+      <form action="{% url 'pokemon-delete' poke.pk %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="delete-button">Delete</button>
+      </form>
     </div>
   {% endfor %}
 </section>
