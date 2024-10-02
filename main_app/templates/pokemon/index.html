@@ -29,6 +29,10 @@
           <p><strong>Abilities:</strong> {{ pokemon.abilities }}</p>
         </div>
       </a>
+      <a href="{% url 'catch-pokemon' pokemon.poke_id %}" class="btn btn-primary" id="catch-button">
+        <img class='pokeball-icon' src="/static/images/pokemon/1.png" alt="Red Pokeball"> 
+        Catch Pokémon
+      </a>
     </div>
 </section>
 
