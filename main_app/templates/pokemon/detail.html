@@ -8,5 +8,7 @@
         <p><strong>Type:</strong> {{ pokemon.type }}</p>
         <p><strong>Abilities:</strong> {{ pokemon.abilities }}</p>
         <p><strong>Moves:</strong> {{ moves }}</p>
+        {% comment %} Add link to Add Pokemon to Collection (Create Functionality) {% endcomment %}
+        <a href="{% url 'add-pokemon' pokemon.poke_id %}">Add to Collection</a>
     </div>
 </section>

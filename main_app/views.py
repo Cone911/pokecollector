@@ -1,7 +1,10 @@
 import random
 import requests
-from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views import View
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
 from .models import Pokemon
 
 class Pokemon:
@@ -52,4 +55,22 @@ def poke_detail(request, poke_id):
         return render(request, 'pokemon/detail.html', {'pokemon': Pokemon(name, poke_id, xp, type, abilities, image_url), 'moves': moves})
     else:
         return HttpResponse('Error fetching data')
+    
+class AddPokemonView(View):
+  def get(self, request, poke_id):
+    response = requests.get(f'https://pokeapi.co/api/v2/pokemon/{poke_id}/')
+    if response.status_code == 200:
+      data = response.json()
+      name = data['name'].capitalize()
+      poke_id = data['id']
+      xp = data['base_experience']
+      type = data['types'][0]['type']['name']
+      abilities = ', '.join([ability['ability']['name'] for ability in data['abilities']])
+      moves = ', '.join([move['move']['name'] for move in data['moves']])
+      image_url = data['sprites']['other']['official-artwork']['front_default']
+      pokemon = Pokemon(name, poke_id, xp, type, abilities, moves, image_url)
+      pokemon.save()
+      return redirect('pokemon-index')
+    else:
+      return HttpResponse('Error fetching data')
     
