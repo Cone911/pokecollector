@@ -4,15 +4,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Pokemon
 
-# class Pokemon:
-#     def __init__(self, name, poke_id, xp, type, abilities, image_url):
-#         self.name = name
-#         self.poke_id = poke_id
-#         self.xp = xp
-#         self.type = type
-#         self.abilities = abilities
-#         self.image_url = image_url
-
 def home(request):
     return render(request, 'pokemon/home.html')
 
@@ -94,3 +85,9 @@ def catch_pokemon(request, poke_id):
         return redirect('pokemon-index')
     else:
         return HttpResponse('Error fetching data from the Pokémon API')
+    
+def show_pokemon(request):
+    pokemon = Pokemon.objects.all()
+    return render(request, 'pokemon/show.html', {'pokemon': pokemon})
+    
+
