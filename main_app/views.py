@@ -82,7 +82,7 @@ def catch_pokemon(request, poke_id):
         
         pokemon.save()
 
-        return redirect('pokemon-index')
+        return redirect('show-pokemon')
     else:
         return HttpResponse('Error fetching data from the Pokémon API')
     
