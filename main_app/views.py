@@ -98,14 +98,6 @@ class PokemonDelete(DeleteView):
     model = Pokemon
     success_url = reverse_lazy('show-pokemon')
 
-from django.shortcuts import get_object_or_404
-from .forms import PokemonNicknameForm
-
-from django.shortcuts import render, redirect
-from django.http import HttpResponseNotFound
-from .forms import PokemonNicknameForm
-from .models import Pokemon
-
 def update_nickname(request, poke_id):
     try:
         pokemon = Pokemon.objects.get(poke_id=poke_id)
