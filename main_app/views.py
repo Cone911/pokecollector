@@ -3,8 +3,7 @@ import requests
 from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.http import HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound
 from .models import Pokemon
 from .forms import PokemonNicknameForm
 
@@ -41,27 +40,22 @@ def index(request):
     return render(request, 'pokemon/index.html', {'pokemon': random_pokemon})
 
 def poke_detail(request, poke_id):
-    response = requests.get(f'https://pokeapi.co/api/v2/pokemon/{poke_id}/')
-    if response.status_code == 200:
-        data = response.json()
-        name = data['name'].capitalize()
-        poke_id = data['id']
-        xp = data['base_experience']
-        poke_type = data['types'][0]['type']['name']
-        abilities = ', '.join([ability['ability']['name'] for ability in data['abilities']])
-        image_url = data['sprites']['other']['official-artwork']['front_default']
-        return render(request, 'pokemon/detail.html', {
-            'pokemon': {
-                'name': name,
-                'poke_id': poke_id,
-                'xp': xp,
-                'type': poke_type,
-                'abilities': abilities,
-                'image_url': image_url
-            }
-        })
-    else:
-        return HttpResponse('Error fetching data')
+    try:
+        pokemon = Pokemon.objects.get(poke_id=poke_id)
+    except Pokemon.DoesNotExist:
+        return HttpResponseNotFound("Pokemon not found")
+
+    return render(request, 'pokemon/detail.html', {
+        'pokemon': {
+            'name': pokemon.name,
+            'poke_id': pokemon.poke_id,
+            'xp': pokemon.xp,
+            'type': pokemon.type,
+            'abilities': pokemon.abilities,
+            'image_url': pokemon.image_url,
+            'nickname': pokemon.nickname
+        }
+    })
 
 def catch_pokemon(request, poke_id):
     response = requests.get(f'https://pokeapi.co/api/v2/pokemon/{poke_id}/')

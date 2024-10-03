@@ -15,7 +15,7 @@
 
 <section class="card-container">
     <div class="card">
-      <a href="{% url 'poke-detail' pokemon.poke_id %}">
+      
         <div class="card-content">
           <div class="card-img-container">
             <img
@@ -28,7 +28,7 @@
           <p><strong>Type:</strong> {{ pokemon.type }}</p>
           <p><strong>Abilities:</strong> {{ pokemon.abilities }}</p>
         </div>
-      </a>
+  
       <a href="{% url 'catch-pokemon' pokemon.poke_id %}" class="btn btn-primary" id="catch-button">
         <img class='pokeball-icon' src="/static/images/pokemon/1.png" alt="Red Pokeball"> 
         Catch Pokémon
