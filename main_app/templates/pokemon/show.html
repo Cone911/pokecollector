@@ -30,6 +30,7 @@
         {% csrf_token %}
         <button type="submit" class="delete-button">Delete</button>
       </form>
+      <a href="{% url 'update-nickname' poke.poke_id %}">Update Nickname</a>
     </div>
   {% endfor %}
 </section>
