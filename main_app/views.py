@@ -1,7 +1,7 @@
 import random
 import requests
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import DeleteView
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
