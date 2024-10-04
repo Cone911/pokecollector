@@ -45,6 +45,12 @@
         {% else %}
           <p>{{ pokemon.nickname }} hasn't been fed yet.</p>
         {% endif %}
+        <h3>Add a Feeding</h3>
+        <form action="{% url 'add-feeding' pokemon.poke_id %}" method="post" class="subsection-content" autocomplete="off">
+          {% csrf_token %} 
+          {{ feeding_form.as_p }}
+          <button type="submit" class="btn submit">Add Feeding</button>
+        </form>
         {% for feeding in feedings %}
           <tr>
             <td>{{feeding.date}}</td>

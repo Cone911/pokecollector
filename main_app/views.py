@@ -5,7 +5,7 @@ from django.views.generic.edit import DeleteView
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from .models import Pokemon
-from .forms import PokemonNicknameForm
+from .forms import PokemonNicknameForm, FeedingForm
 
 def home(request):
     return render(request, 'pokemon/home.html')
@@ -42,12 +42,14 @@ def index(request):
 def poke_detail(request, poke_id):
     try:
         pokemon = Pokemon.objects.get(poke_id=poke_id)
+        feeding_form = FeedingForm()
     except Pokemon.DoesNotExist:
         return HttpResponseNotFound("Pokemon not found")
 
     return render(request, 'pokemon/detail.html', {
         'pokemon': pokemon,
-        'feedings': pokemon.feedings.all()  # Use the new related_name
+        'feedings': pokemon.feedings.all(),
+        'feeding_form': feeding_form,
     })
 
 def catch_pokemon(request, poke_id):
@@ -100,4 +102,13 @@ def update_nickname(request, poke_id):
         form = PokemonNicknameForm(instance=pokemon)
 
     return render(request, 'pokemon/update_nickname.html', {'form': form, 'pokemon': pokemon})
+
+def add_feeding(request, poke_id):
+    form = FeedingForm(request.POST)
+
+    if form.is_valid():
+        new_feeding = form.save(commit=False)
+        new_feeding.pokemon_id = poke_id
+        new_feeding.save()
+    return redirect('poke-detail', poke_id=poke_id)
 
