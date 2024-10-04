@@ -33,7 +33,7 @@ class Feeding(models.Model):
         choices=MEALS,
         default=MEALS[0][0]
     )
-    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, related_name='feedings')
 
     def __str__(self):
         return f"{self.get_meal_display()} on {self.date}"

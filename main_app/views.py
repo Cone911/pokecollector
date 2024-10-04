@@ -46,15 +46,8 @@ def poke_detail(request, poke_id):
         return HttpResponseNotFound("Pokemon not found")
 
     return render(request, 'pokemon/detail.html', {
-        'pokemon': {
-            'name': pokemon.name,
-            'poke_id': pokemon.poke_id,
-            'xp': pokemon.xp,
-            'type': pokemon.type,
-            'abilities': pokemon.abilities,
-            'image_url': pokemon.image_url,
-            'nickname': pokemon.nickname
-        }
+        'pokemon': pokemon,
+        'feedings': pokemon.feedings.all()  # Use the new related_name
     })
 
 def catch_pokemon(request, poke_id):
