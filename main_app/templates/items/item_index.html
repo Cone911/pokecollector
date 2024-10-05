@@ -1,0 +1,36 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/items/item-index.css' %}" />
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <h1>All Items</h1>
+  <img src="{% static 'images/pokemon_icon.png' %}" alt="Pokemon Icon" />
+  <img src="{% static 'images/pokemon_icon.png' %}" alt="Pokemon Icon" />
+  <img src="{% static 'images/pokemon_icon.png' %}" alt="Pokemon Icon" />
+  <img src="{% static 'images/pokemon_icon.png' %}" alt="Pokemon Icon" />
+</section>
+
+<section class="card-container">
+  {% for item in items %}
+    <div class="card">
+      <div class="card-bg"></div>
+      <a href="{% url 'item-detail' item.id %}">
+        <div class="card-content">
+          <h2>{{ item.name }}</h2>
+          <img src="{{ item.sprite_url }}" alt="{{ item.name }}" />
+          <p>Cost: {{ item.cost }}</p>
+          <p>Effect: {{ item.effect }}</p>
+          <p>Flavor Text: {{ item.flavor_text }}</p>
+          {% if item.note %}
+            <p>Note: {{ item.note }}</p>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}

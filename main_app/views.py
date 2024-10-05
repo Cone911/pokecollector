@@ -2,7 +2,8 @@ import random
 import requests
 from django import forms
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from .models import Pokemon, Item
@@ -117,7 +118,7 @@ class ItemCreate(CreateView):
     model = Item
     form_class = ItemForm
     template_name = 'items/item_form.html'
-    success_url = reverse_lazy('item-list')
+    success_url = reverse_lazy('item-index')
 
     def form_valid(self, form):
         item_name = form.cleaned_data['name']
@@ -132,3 +133,24 @@ class ItemCreate(CreateView):
 
         form.save()
         return redirect(self.success_url)
+
+class ItemList(ListView):
+    model = Item
+    template_name = 'items/item_index.html'
+    context_object_name = 'items'
+
+class ItemDetail(DetailView):
+    model = Item
+    template_name = 'items/item_detail.html'
+    context_object_name = 'item'
+
+class ItemUpdate(UpdateView):
+    model = Item
+    fields = ['name', 'cost', 'effect', 'flavor_text', 'note']
+    template_name = 'items/item_form.html'
+    success_url = reverse_lazy('item-index')
+
+class ItemDelete(DeleteView):
+    model = Item
+    template_name = 'items/item_confirm_delete.html'
+    success_url = reverse_lazy('item-index')

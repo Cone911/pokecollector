@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/items/item-detail.css' %}" />
+{% endblock %}
+{% block content %}
+
+<div class="card">
+  <div class="card-bg"></div>
+  <div class="card-content">
+    <h2>{{ item.name }}</h2>
+    <img src="{{ item.sprite_url }}" alt="{{ item.name }}" />
+    <p>Cost: {{ item.cost }}</p>
+    <p>Effect: {{ item.effect }}</p>
+    <p>Flavor Text: {{ item.flavor_text }}</p>
+    {% if item.note %}
+      <p>Note: {{ item.note }}</p>
+    {% endif %}
+  </div>
+</div>
+<a href="{% url 'item-update' item.id %}" class="btn warn">Edit</a>
+<a href="{% url 'item-delete' item.id %}" class="btn danger">Delete</a>
+
+{% endblock %}
