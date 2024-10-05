@@ -9,7 +9,7 @@
   <h1>Your Pokémon Roster</h1>
 </section>
 
-<section class="card-container">
+<section class="your-pokemon-container">
   {% for poke in pokemon %}
     <div class="card">
       <a href="{% url 'poke-detail' poke.poke_id %}">
@@ -20,8 +20,12 @@
               alt="{{ poke.name }}"
             />
           </div>
-          <h2 class="card-title">{{ poke.name }}</h2>
-          <p><strong>Nickname:</strong> {{ poke.nickname }}</p>
+          <h2 class="card-title">{{ poke.nickname }} 
+            <a href="{% url 'update-nickname' poke.poke_id %}">
+               <i class="fa-solid fa-pen-to-square"></i> 
+            </a>
+          </h2> 
+          <p><strong>Name:</strong> {{ poke.name }}</p>
           <p><strong>Experience:</strong> {{ poke.xp }}</p>
           <p><strong>Type:</strong> {{ poke.type }}</p>
           <p><strong>Abilities:</strong> {{ poke.abilities }}</p>

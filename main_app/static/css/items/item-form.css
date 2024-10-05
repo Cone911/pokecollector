@@ -1,0 +1,29 @@
+.add-an-item-form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../images/items/Add-Item-Background.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 32px;
+    height: 55vh;
+}
+
+.form-container{
+    width: 45%;
+    padding: 2%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+}
+
+.form-container label{
+    font-size: small;
+}
+
+.button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

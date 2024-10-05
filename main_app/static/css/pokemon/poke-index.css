@@ -1,21 +1,63 @@
-.card-container {
-    padding: 0 30px;
+.random-poke-container {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    height: 75vh;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+    background-image: url('../../images/pokemon/Index-Background.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 12px;
+  }
+
+  .your-pokemon-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .pokemon-details-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../images/pokemon/Pokemon-Detail-Background.avif');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 12px;
   }
   
   .card {
     width: 275px;
+    height: fit-content;
     margin: 10px;
     border-radius: 12px;
-    background-color: rgba(204, 215, 228, 0.521);
+    background-color: rgba(204, 215, 228, 0.85);
     box-shadow: var(--card-box-shadow);
+    padding: 2%;
+  }
+
+  .card-title{
+    text-decoration: none;
+  }
+
+  .card-content a{
+    text-decoration: none;
   }
   
   .card-content {
     padding: 10px;
     width: 100%;
+  }
+
+  .pokemon-card{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 
   .card-img-container{
@@ -58,3 +100,47 @@
     object-position: center;
     vertical-align: center;
   }
+
+ .pokemon-details{
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.75) 0%, rgba(0, 255, 255, 0.85) 100%);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 12px;
+  box-shadow:rgba(10, 10, 10, 0.5) 3px 3px 12px;
+ }
+
+ .pokemon-details p{
+  font-size: medium;
+ }
+
+
+.feedings-items-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+  .small-icons{
+    height: 60px;
+  }
+
+  .subsection-title h2{
+    text-align: center;
+    font-size: var(--font-xl);
+  }
+
+  .feedings p{
+    font-size: medium;
+  }
+
+  .feedings table{
+    font-size: medium;
+  }
+
+  .diet-table-container{
+    align-self: flex-start;
+  }
+
+  .diet-table-container{
+    font-size: small;
+  }
+}

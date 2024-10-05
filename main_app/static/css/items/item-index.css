@@ -1,49 +1,54 @@
 .card-container {
-    padding: 0 40px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    height: 95vh;
     display: flex;
+    flex-direction: column-reverse;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    overflow-y: scroll;
+    background-image: url('../../images/items/Item-Index-Background.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   
   .card {
-    width: 224px;
-    height: 224px;
-    margin: 10px;
-    border: solid 2px;
+    width: 65%;
+    height: auto;
+    margin: 8px;
+    padding: 8px;
     box-shadow: var(--card-box-shadow);
     position: relative;
+    border-radius: 12px;
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.45), lightcyan);
+    transition: box-shadow 0.3s ease;
   }
-  
-  .card-bg {
-    opacity: 0.4;
-    position: absolute;
-    display: inline-flex;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+
+  .clickable-card{
+    border: none;
+    height: fit-content;
   }
-  
-  .card-content {
-    padding: 15px;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    flex-direction: column;
+
+  .card-content{
+    height: fit-content;
+    padding: 2%;
   }
-  
-  .card > a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: inline-block;
+
+  .card-title{
+    display:flex;
+  }
+
+  .card-title img{
+    width:48px;
+  }
+    
+
+  .card > a{
     text-decoration: none;
-    color: var(--text-color);
+    color: black;
   }
+
   
   .card h2 {
     margin: 7px 0;
@@ -62,4 +67,3 @@
   .page-header > img:first-of-type {
     margin-left: 15px;
   }
-  

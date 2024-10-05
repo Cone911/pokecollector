@@ -5,61 +5,69 @@
 {% endblock %} 
 {% block content %}
 
-<section class="card-container">
+<section class="pokemon-details-container">
     <div class="pokemon-card">
         <div class="pokemon-img-container">
             <img src="{{ pokemon.image_url }}" alt="{{ pokemon.name }}">
         </div>
-        <h2 class="pokemon-name">{{ pokemon.name }}</h2>
-        <p><strong>Nickname:</strong> {{ pokemon.nickname }}</p>
-        <p><strong>Experience:</strong> {{ pokemon.xp }}</p>
-        <p><strong>Type:</strong> {{ pokemon.type }}</p>
-        <p><strong>Abilities:</strong> {{ pokemon.abilities }}</p>
+        <div class="pokemon-details">
+            <h2 class="pokemon-name">
+              {{ pokemon.nickname }}
+              <a href="{% url 'update-nickname' pokemon.poke_id %}">
+                <i class="fa-solid fa-pen-to-square"></i> 
+              </a>
+            </h2> 
+            <p><strong>Name:</strong> {{ pokemon.name }}</p>
+            <p><strong>XP:</strong> {{ pokemon.xp }}</p>
+            <p><strong>Type:</strong> {{ pokemon.type }}</p>
+            <p><strong>Abilities:</strong> {{ pokemon.abilities }}</p>
+        </div>
     </div>
 </section>
 
-<div class="feedings-toy-container">
+<div class="feedings-items-container">
   <section class="feedings">
     <div class="subsection-title">
       <h2>Feedings</h2>
-      <img
-        src="{% static 'images/cat-cone.svg' %}"
-        alt="TODO: Add Onigiri"
-      />
-      <img src="{% static 'images/cat-onigiri.svg' %}" alt="TODO: Add Sushi" />
-      <img
-        src="{% static 'images/kitty-kabob.svg' %}"
-        alt="TODO: Add Pokemon Foods Icon"
-      />
+      <img class='small-icons' src="{% static 'images/pokemon/Onigiri.png' %}" alt="Onigiri"/>
+      <img class='small-icons' src="{% static 'images/pokemon/Sushi.png' %}" alt="Sushi"/>
+      <img class='small-icons' src="{% static 'images/pokemon/Ramen.png' %}" alt="Ramen"/>
     </div>
+    <h3>Add a Feeding</h3>
+    <form action="{% url 'add-feeding' pokemon.poke_id %}" method="post" class="subsection-content" autocomplete="off">
+      {% csrf_token %} 
+      {{ feeding_form.as_p }}
+      <button type="submit" class="btn submit">Add Feeding</button>
+    </form>
+  </section>
+
+  <section class='diet-table-container'>
+    <h2>Diet Control Table</h2>
     <table>
       <thead>
         <tr>
+          {% if feedings %}
           <th>Date</th>
           <th>Meal</th>
+          {% endif %}
         </tr>
       </thead>
       <tbody>
         {% if feedings %}
-          <p>{{ pokemon.nickname }} has been fed.</p>
+        <p>{{ pokemon.nickname }} has been fed.</p>
         {% else %}
-          <p>{{ pokemon.nickname }} hasn't been fed yet.</p>
+        <p>{{ pokemon.nickname }} hasn't been fed yet.</p>
         {% endif %}
-        <h3>Add a Feeding</h3>
-        <form action="{% url 'add-feeding' pokemon.poke_id %}" method="post" class="subsection-content" autocomplete="off">
-          {% csrf_token %} 
-          {{ feeding_form.as_p }}
-          <button type="submit" class="btn submit">Add Feeding</button>
-        </form>
         {% for feeding in feedings %}
-          <tr>
-            <td>{{feeding.date}}</td>
-            <td>{{feeding.get_meal_display}}</td>
-          </tr>
+        <tr>
+          <td>{{feeding.date}}</td>
+          <td>{{feeding.get_meal_display}}</td>
+        </tr>
         {% endfor %}
       </tbody>
     </table>
   </section>
+  
 </div>
 
 {% endblock %}
