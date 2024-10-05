@@ -1,11 +1,12 @@
 import random
 import requests
+from django import forms
 from django.urls import reverse_lazy
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import CreateView, DeleteView
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
-from .models import Pokemon
-from .forms import PokemonNicknameForm, FeedingForm
+from .models import Pokemon, Item
+from .forms import PokemonNicknameForm, FeedingForm, ItemForm
 
 def home(request):
     return render(request, 'pokemon/home.html')
@@ -112,3 +113,22 @@ def add_feeding(request, poke_id):
         new_feeding.save()
     return redirect('poke-detail', poke_id=poke_id)
 
+class ItemCreate(CreateView):
+    model = Item
+    form_class = ItemForm
+    template_name = 'items/item_form.html'
+    success_url = reverse_lazy('item-list')
+
+    def form_valid(self, form):
+        item_name = form.cleaned_data['name']
+        response = requests.get(f'https://pokeapi.co/api/v2/item/{item_name}/')
+
+        if response.status_code == 200:
+            data = response.json()
+            form.instance.cost = data.get('cost', 0)
+            form.instance.effect = data.get('effect_entries')[0].get('effect')
+            form.instance.flavor_text = data.get('flavor_text_entries')[0].get('text')
+            form.instance.sprite_url = data.get('sprites').get('default')
+
+        form.save()
+        return redirect(self.success_url)

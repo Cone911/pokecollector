@@ -41,5 +41,17 @@ class Feeding(models.Model):
     class Meta:
         ordering = ['-date']
 
+class Item(models.Model):
+    name = models.CharField(max_length=100)
+    cost = models.IntegerField()
+    effect = models.TextField()
+    flavor_text = models.TextField()
+    sprite_url = models.URLField()
+    note = models.TextField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('item-detail', kwargs={'pk': self.id})
 
