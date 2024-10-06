@@ -163,3 +163,9 @@ def give_item(request, pokemon_id, item_id):
     pokemon.items.add(item_id)
     return redirect('poke-detail', poke_id = pokemon.poke_id)
 
+def remove_item(request, pokemon_id, item_id):
+    pokemon = Pokemon.objects.get(id=pokemon_id)
+    item = Item.objects.get(id=item_id)
+    pokemon.items.remove(item)
+    return redirect('poke-detail', poke_id=pokemon.poke_id)
+

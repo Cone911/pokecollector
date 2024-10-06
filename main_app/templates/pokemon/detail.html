@@ -92,6 +92,10 @@
                 <img src="{{ item.sprite_url }}" alt="{{ item.name }}">
                 <p>{{ item.name | capfirst}}</p>
               </div>
+              <form action="{% url 'remove-item' pokemon.id item.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="delete-button">Remove</button>
+              </form>
             </a>
           </div>
         </div>
