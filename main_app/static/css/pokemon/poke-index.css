@@ -76,7 +76,7 @@
   
   .card > a {
     text-decoration: none;
-    color: var(--text-color);
+    color: white;
   }
   
   .card h2 {
@@ -114,19 +114,10 @@
  }
 
 
-.feedings-items-container{
+.feedings-container{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  
-  .small-icons{
-    height: 60px;
-  }
-
-  .subsection-title h2{
-    text-align: center;
-    font-size: var(--font-xl);
-  }
 
   .feedings p{
     font-size: medium;
@@ -143,4 +134,80 @@
   .diet-table-container{
     font-size: small;
   }
+
+  h2{
+  font-size: x-large;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 12px;
+  text-align: center;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.45), lightcyan);
+  }
+}
+
+.subsection-title{
+  width: 100%;
+}
+
+.small-icons-container{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.small-icons{
+  height: 60px;
+}
+
+.items-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.items-container h2, .items-container h3{
+  font-size: x-large;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 12px;
+  text-align: center;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.45), lightcyan);
+}
+
+.items-list{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.item-and-icon-container{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.item-and-icon-container p {
+  font-size: medium;
+}
+
+.item-and-icon-container img{
+  width: 50px;
+}
+
+.give-item-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 12px;
+  box-shadow:rgba(10, 10, 10, 0.5) 3px 3px 8px;
+}
+
+.all-items{
+  font-size: large;
 }

@@ -25,7 +25,7 @@
     </div>
 </section>
 
-<div class="feedings-items-container">
+<div class="feedings-container">
   <section class="feedings">
     <div class="subsection-title">
       <h2>Feedings</h2>
@@ -69,5 +69,60 @@
   </section>
   
 </div>
+
+<section class="items-container">
+  <div class="subsection-title">
+    <h2>Items</h2>
+    <div class="small-icons-container">
+      <img class='small-icons' src="{% static 'images/pokemon/1.png' %}" alt="Red Pokeball Icon" />
+      <img class='small-icons' src="{% static 'images/pokemon/2.png' %}" alt="Blue Pokeball Icon" />
+      <img class='small-icons' src="{% static 'images/pokemon/3.png' %}" alt="Red GameBoy" />
+    </div>
+  </div>
+
+<section class="display-pokemon-items">
+  <h3>{{ pokemon.nickname }}'s Items</h3>
+  <div class="items-list">
+    {% if pokemon.items.count %} 
+      {% for item in pokemon.items.all %}
+        <div class="give-item-card">
+          <div class="pokemon-items-container">
+            <a href="{% url 'item-detail' item.id %}">
+              <div class="item-and-icon-container">
+                <img src="{{ item.sprite_url }}" alt="{{ item.name }}">
+                <p>{{ item.name | capfirst}}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      {% endfor %} 
+    {% else %}
+      <p class="no-items">{{pokemon.nickname}} doesn't have any items!</p>
+    {% endif %}
+  </div>
+</section>
+
+  <h3>Available Items</h3>
+  <div class="items-list">
+    {% if items.count %}
+      {% for item in items %}
+      <div class="give-item-card">
+        <div class="item-and-icon-container">
+          <img src="{{ item.sprite_url }}" alt="{{ item.name }}">
+          <p>{{ item.name | capfirst}}</p>
+        </div>
+          <form action="{% url 'give-item' pokemon.id item.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn submit">Give Item</button>
+          </form>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="all-items">{{pokemon.nickname}} already has all the available items 🥳</p>
+    {% endif %}
+  </div>
+</section>
+
+
 
 {% endblock %}

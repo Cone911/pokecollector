@@ -1,40 +1,50 @@
 main {
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: flex-start;
+    justify-content: center;
     min-height: auto;
+    height: 50vh;
+    background-image: url('../../images/items/Item-Index-Background.jpg');
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .item-details-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   
-  .card {
-    width: 224px;
-    height: 224px;
-    margin: 25px 25px 15px 40px;
+  .item-card {
+    width: 65%;
+    height: 100%;
+    margin: 0px;
+    margin-top: 32px;
     border: solid 2px;
     box-shadow: var(--card-box-shadow);
     position: relative;
+    border-radius: 12px;
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.45), lightcyan);
   }
   
-  .card-bg {
-    opacity: 0.4;
-    position: absolute;
-    display: inline-flex;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .card-content {
-    padding: 15px;
-    height: 100%;
-    width: 100%;
+  .item-and-icon-container{
     display: flex;
-    align-items: flex-end;
+    flex-direction: row-reverse;
     justify-content: flex-end;
-    flex-direction: column;
-    color: var(--text-color);
+    align-items: center;
+    padding: 8px;
   }
-  
+
+  .item-and-icon-container img{
+    width: 72px;
+  }
+
+  .card-content{
+    padding: 12px;
+  }
+
   .btn {
     margin-bottom: 15px;
   }
@@ -45,9 +55,13 @@ main {
     z-index: 1;
   }
   
-  .card p {
+  .card-content p {
     margin: 0;
     font-size: var(--font-reg);
     z-index: 1;
+  }
+
+  .edit-delete-buttons{
+    margin: 12px;
   }
   

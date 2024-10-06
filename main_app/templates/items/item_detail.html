@@ -5,21 +5,24 @@
 {% endblock %}
 {% block content %}
 
-<div class="card">
-  <div class="card-bg"></div>
-  <div class="card-content">
-    <h2>{{ item.name }}</h2>
-
-    <img src="{{ item.sprite_url }}" alt="{{ item.name }}" />
-    <p>Cost: {{ item.cost }}</p>
-    <p>Effect: {{ item.effect }}</p>
-    <p>Flavor Text: {{ item.flavor_text }}</p>
-    {% if item.note %}
-      <p>Note: {{ item.note }}</p>
-    {% endif %}
-  </div>
+<div class="item-details-container">
+    <div class="item-card">
+        <div class="card-content">
+            <div class="item-and-icon-container">
+                <h2>{{ item.name | capfirst }}</h2>
+                <img src="{{ item.sprite_url }}" alt="{{ item.name }}" />
+            </div>
+                <p><strong>Cost: </strong> {{ item.cost }}</p>
+                <p><strong>Effect: </strong>{{ item.effect }}</p>
+                <p><strong>Flavor Text: </strong>{{ item.flavor_text }}</p>
+                {% if item.note %}
+                <p><strong>Note: </strong>{{ item.note }}</p>
+                {% endif %}
+            <div class="edit-delete-buttons">
+                <a href="{% url 'item-update' item.id %}" class="btn warn">Edit</a>
+                <a href="{% url 'item-delete' item.id %}" class="btn danger">Delete</a>
+            </div>
+        </div>
 </div>
-<a href="{% url 'item-update' item.id %}" class="btn warn">Edit</a>
-<a href="{% url 'item-delete' item.id %}" class="btn danger">Delete</a>
 
 {% endblock %}

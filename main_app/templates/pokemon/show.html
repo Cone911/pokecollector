@@ -20,7 +20,12 @@
               alt="{{ poke.name }}"
             />
           </div>
-          <h2 class="card-title">{{ poke.nickname }} 
+          <h2 class="card-title">
+            {% if poke.nickname %}
+              {{ poke.nickname }}
+            {% else %}
+              Add a Nickname
+            {% endif %}
             <a href="{% url 'update-nickname' poke.poke_id %}">
                <i class="fa-solid fa-pen-to-square"></i> 
             </a>
@@ -35,7 +40,6 @@
         {% csrf_token %}
         <button type="submit" class="delete-button">Delete</button>
       </form>
-      <a href="{% url 'update-nickname' poke.poke_id %}">Update Nickname</a>
     </div>
   {% endfor %}
 </section>

@@ -1,18 +1,18 @@
-{% extends 'base.html' %} 
-{% block content %}
-<h1>About the Poke Collector</h1>
-<hr />
-<p class="page-content">
-  The Pokemon Collector is a site where you can view and collect pokemon.
+  {% extends 'base.html' %} 
+  {% block content %}
+  <h1>About the Poké Collector</h1>
+  <hr />
+  <p class="page-content">
+    The Pokemon Collector is a site where you can view and collect pokemon.
+  </p>
+  <h2>How to Use the Site: </h2>
+  <ul class="page-content">
+    <li>You can view your Pokemon roster by clicking "Your Pokemon" in the navigation bar.</li>
+    <li>You can also view more information about the Pokemon by clicking on the Pokemon's card.</li>
+    <li>If you would like to add a Pokemon to your collection, you can do so by clicking on the "Catch Pokemon" button on the Pokemon's page.</li>
+    <li>You can view all the Pokemon in your collection by clicking on the "My Collection" link in the navigation bar.</li>
+  </ul>
   <br>
-  <br>
-  You can view your Pokemon roster by clicking "Your Pokemon" in the navigation bar. 
-  <br>
-  <br>
-  You can also view more information about the Pokemon by clicking on the Pokemon's card. 
-  <br>
-  If you would like to add a Pokemon to your collection, you can do so by clicking on the "Catch Pokemon" button on the Pokemon's page.
-  <br>
-  You can view all the Pokemon in your collection by clicking on the "My Collection" link in the navigation bar.
-</p>
-{% endblock %}
+  <a href="{% url 'pokemon-index' %}">Catch your first pokémon!</a>
+
+  {% endblock %}

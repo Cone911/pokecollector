@@ -16,9 +16,11 @@ def about(request):
     return render(request, 'about.html')
 
 def index(request):
+
     def fetch_random_pokemon():
         random_index = random.randint(1, 150)
         response = requests.get(f'https://pokeapi.co/api/v2/pokemon/{random_index}/')
+
         if response.status_code == 200:
             data = response.json()
             name = data['name'].capitalize()
@@ -35,6 +37,7 @@ def index(request):
                 'abilities': abilities,
                 'image_url': image_url
             }
+        
         else:
             return None
 
@@ -42,16 +45,16 @@ def index(request):
     return render(request, 'pokemon/index.html', {'pokemon': random_pokemon})
 
 def poke_detail(request, poke_id):
-    try:
-        pokemon = Pokemon.objects.get(poke_id=poke_id)
-        feeding_form = FeedingForm()
-    except Pokemon.DoesNotExist:
-        return HttpResponseNotFound("Pokemon not found")
+    pokemon = Pokemon.objects.get(poke_id=poke_id)
+    # Only show items that the pokemon doesn't have.
+    items_pokemon_doesnt_have = Item.objects.exclude(id__in=pokemon.items.all().values_list('id'))
+    feeding_form = FeedingForm()
 
     return render(request, 'pokemon/detail.html', {
         'pokemon': pokemon,
         'feedings': pokemon.feedings.all(),
         'feeding_form': feeding_form,
+        'items': items_pokemon_doesnt_have,
     })
 
 def catch_pokemon(request, poke_id):
@@ -154,3 +157,9 @@ class ItemDelete(DeleteView):
     model = Item
     template_name = 'items/item_confirm_delete.html'
     success_url = reverse_lazy('item-index')
+
+def give_item(request, pokemon_id, item_id):
+    pokemon = Pokemon.objects.get(id=pokemon_id)
+    pokemon.items.add(item_id)
+    return redirect('poke-detail', poke_id = pokemon.poke_id)
+
